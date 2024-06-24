@@ -1,89 +1,51 @@
 public class UtilityBillManagement {
 
-    private List<UtilityBill> utilityBills;
+    private List<Bill> bills;
     private List<Payment> payments;
 
-    public UtilityBillManagement(List<UtilityBill> utilityBills, List<Payment> payments) {
-        this.utilityBills = utilityBills;
+    public UtilityBillManagement(List<Bill> bills, List<Payment> payments) {
+        this.bills = bills;
         this.payments = payments;
     }
 
-    public Summary getSummary() {
-        Summary summary = new Summary();
-        for (UtilityBill utilityBill : utilityBills) {
-            summary.addUtilityBill(utilityBill);
-        }
-        for (Payment payment : payments) {
-            summary.addPayment(payment);
+    public Map<String, Double> getBillSummary() {
+        Map<String, Double> summary = new HashMap<>();
+        for (Bill bill : bills) {
+            summary.put(bill.getUtilityType(), bill.getAmount());
         }
         return summary;
     }
 
-    public static class Summary {
-        private double totalBillAmount;
-        private double totalPaidAmount;
-        private double outstandingAmount;
-
-        public void addUtilityBill(UtilityBill utilityBill) {
-            totalBillAmount += utilityBill.getAmount();
+    public Map<String, Double> getPaymentSummary() {
+        Map<String, Double> summary = new HashMap<>();
+        for (Payment payment : payments) {
+            summary.put(payment.getUtilityType(), payment.getAmount());
         }
-
-        public void addPayment(Payment payment) {
-            totalPaidAmount += payment.getAmount();
-        }
-
-        public double getTotalBillAmount() {
-            return totalBillAmount;
-        }
-
-        public double getTotalPaidAmount() {
-            return totalPaidAmount;
-        }
-
-        public double getOutstandingAmount() {
-            return totalBillAmount - totalPaidAmount;
-        }
+        return summary;
     }
 
-    public static class UtilityBill {
-        private String id;
-        private String type;
-        private double amount;
+    public static void main(String[] args) {
+        List<Bill> bills = new ArrayList<>();
+        bills.add(new Bill("Electricity", 100.0));
+        bills.add(new Bill("Water", 50.0));
+        bills.add(new Bill("Gas", 75.0));
 
-        public UtilityBill(String id, String type, double amount) {
-            this.id = id;
-            this.type = type;
-            this.amount = amount;
+        List<Payment> payments = new ArrayList<>();
+        payments.add(new Payment("Electricity", 100.0));
+        payments.add(new Payment("Water", 50.0));
+
+        UtilityBillManagement utilityBillManagement = new UtilityBillManagement(bills, payments);
+
+        Map<String, Double> billSummary = utilityBillManagement.getBillSummary();
+        System.out.println("Bill Summary:");
+        for (Map.Entry<String, Double> entry : billSummary.entrySet()) {
+            System.out.println(entry.getKey() + ": $" + entry.getValue());
         }
 
-        public String getId() {
-            return id;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public double getAmount() {
-            return amount;
-        }
-    }
-
-    public static class Payment {
-        private String id;
-        private double amount;
-
-        public Payment(String id, double amount) {
-            this.id = id;
-            this.amount = amount;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public double getAmount() {
-            return amount;
+        Map<String, Double> paymentSummary = utilityBillManagement.getPaymentSummary();
+        System.out.println("Payment Summary:");
+        for (Map.Entry<String, Double> entry : paymentSummary.entrySet()) {
+            System.out.println(entry.getKey() + ": $" + entry.getValue());
         }
     }
 }
