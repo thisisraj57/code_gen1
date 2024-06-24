@@ -1,120 +1,70 @@
 public class UtilityBillManagement {
 
-    public static void main(String[] args) {
-        // Create a list of utility bills
-        List<UtilityBill> utilityBills = List.of(
-                new UtilityBill("Electricity", 100.0, "2023-03-15"),
-                new UtilityBill("Gas", 50.0, "2023-04-15"),
-                new UtilityBill("Water", 25.0, "2023-05-15")
-        );
+    // Data Model
+    private List<UtilityBill> bills;
+    private List<UtilityPayment> payments;
 
-        // Create a list of utility payments
-        List<UtilityPayment> utilityPayments = List.of(
-                new UtilityPayment("Electricity", 100.0, "2023-03-15"),
-                new UtilityPayment("Gas", 50.0, "2023-04-15")
-        );
+    // Constructor
+    public UtilityBillManagement(List<UtilityBill> bills, List<UtilityPayment> payments) {
+        this.bills = bills;
+        this.payments = payments;
+    }
 
-        // Display a summary of all utility bills and payments
+    // Methods
+    public void viewSummary() {
+        // Display a summary of all utility bills and payments, including amounts and due dates.
+
+        System.out.println("------------------------------------------");
         System.out.println("Utility Bill Summary");
-        System.out.println("--------------------");
-        for (UtilityBill bill : utilityBills) {
-            System.out.println(bill);
-        }
-        for (UtilityPayment payment : utilityPayments) {
-            System.out.println(payment);
+        System.out.println("------------------------------------------");
+
+        System.out.println("Upcoming Bills:");
+        for (UtilityBill bill : bills) {
+            if (!bill.isPaid()) {
+                System.out.println("-" + bill.getDescription() + " - Amount: $" + bill.getAmount() + " - Due Date: " + bill.getDueDate());
+            }
         }
 
-        // Display detailed information on individual utility transactions
-        System.out.println("Detailed Transaction Information");
-        System.out.println("----------------------------");
-        for (UtilityTransaction transaction : utilityBills) {
-            System.out.println(transaction);
-        }
-        for (UtilityTransaction transaction : utilityPayments) {
-            System.out.println(transaction);
+        System.out.println("------------------------------------------");
+
+        System.out.println("Recent Payments:");
+        for (UtilityPayment payment : payments) {
+            System.out.println("-" + payment.getDescription() + " - Amount: $" + payment.getAmount() + " - Date: " + payment.getDate());
         }
     }
 
-    public static class UtilityBill implements UtilityTransaction {
+    public void viewDetail(int billId) {
+        // Display detailed information on individual utility transactions.
 
-        private String type;
-        private double amount;
-        private String dueDate;
+        UtilityBill bill = getBillById(billId);
 
-        public UtilityBill(String type, double amount, String dueDate) {
-            this.type = type;
-            this.amount = amount;
-            this.dueDate = dueDate;
-        }
+        System.out.println("------------------------------------------");
+        System.out.println("Utility Bill Detail");
+        System.out.println("------------------------------------------");
 
-        @Override
-        public String getType() {
-            return type;
-        }
+        System.out.println("Description: " + bill.getDescription());
+        System.out.println("Amount: $" + bill.getAmount());
+        System.out.println("Due Date: " + bill.getDueDate());
 
-        @Override
-        public double getAmount() {
-            return amount;
-        }
+        System.out.println("------------------------------------------");
 
-        @Override
-        public String getDueDate() {
-            return dueDate;
-        }
-
-        @Override
-        public String toString() {
-            return "UtilityBill{" +
-                    "type='" + type + '\'' +
-                    ", amount=" + amount +
-                    ", dueDate='" + dueDate + '\'' +
-                    '}';
+        System.out.println("Payments:");
+        for (UtilityPayment payment : payments) {
+            if (payment.getBillId() == billId) {
+                System.out.println("-" + payment.getDescription() + " - Amount: $" + payment.getAmount() + " - Date: " + payment.getDate());
+            }
         }
     }
 
-    public static class UtilityPayment implements UtilityTransaction {
+    private UtilityBill getBillById(int billId) {
+        // Helper method to get a bill by its ID.
 
-        private String type;
-        private double amount;
-        private String date;
-
-        public UtilityPayment(String type, double amount, String date) {
-            this.type = type;
-            this.amount = amount;
-            this.date = date;
+        for (UtilityBill bill : bills) {
+            if (bill.getId() == billId) {
+                return bill;
+            }
         }
 
-        @Override
-        public String getType() {
-            return type;
-        }
-
-        @Override
-        public double getAmount() {
-            return amount;
-        }
-
-        @Override
-        public String getDueDate() {
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return "UtilityPayment{" +
-                    "type='" + type + '\'' +
-                    ", amount=" + amount +
-                    ", date='" + date + '\'' +
-                    '}';
-        }
-    }
-
-    public interface UtilityTransaction {
-
-        String getType();
-
-        double getAmount();
-
-        String getDueDate();
+        return null;
     }
 }
