@@ -1,70 +1,64 @@
-public class UtilityBillManagement {
+class UtilityBillManagement {
 
-    // Data Model
-    private List<UtilityBill> bills;
-    private List<UtilityPayment> payments;
+    // Data structures to store utility bills and payments
+    private Map<String, List<Bill>> bills;
+    private Map<String, List<Payment>> payments;
 
-    // Constructor
-    public UtilityBillManagement(List<UtilityBill> bills, List<UtilityPayment> payments) {
-        this.bills = bills;
-        this.payments = payments;
+    // Constructor to initialize the system
+    public UtilityBillManagement() {
+        this.bills = new HashMap<>();
+        this.payments = new HashMap<>();
     }
 
-    // Methods
-    public void viewSummary() {
-        // Display a summary of all utility bills and payments, including amounts and due dates.
+    // Method to add a new bill
+    public void addBill(String utilityName, Bill bill) {
+        if (bills.containsKey(utilityName)) {
+            bills.get(utilityName).add(bill);
+        } else {
+            bills.put(utilityName, List.of(bill));
+        }
+    }
 
-        System.out.println("------------------------------------------");
-        System.out.println("Utility Bill Summary");
-        System.out.println("------------------------------------------");
+    // Method to add a new payment
+    public void addPayment(String utilityName, Payment payment) {
+        if (payments.containsKey(utilityName)) {
+            payments.get(utilityName).add(payment);
+        } else {
+            payments.put(utilityName, List.of(payment));
+        }
+    }
 
-        System.out.println("Upcoming Bills:");
-        for (UtilityBill bill : bills) {
-            if (!bill.isPaid()) {
-                System.out.println("-" + bill.getDescription() + " - Amount: $" + bill.getAmount() + " - Due Date: " + bill.getDueDate());
+    // Method to get a summary of all bills and payments
+    public Map<String, Summary> getSummary() {
+        Map<String, Summary> summary = new HashMap<>();
+        for (Map.Entry<String, List<Bill>> entry : bills.entrySet()) {
+            String utilityName = entry.getKey();
+            List<Bill> utilityBills = entry.getValue();
+
+            double totalBillAmount = 0;
+            double totalPaymentAmount = 0;
+            for (Bill bill : utilityBills) {
+                totalBillAmount += bill.getAmount();
             }
-        }
 
-        System.out.println("------------------------------------------");
-
-        System.out.println("Recent Payments:");
-        for (UtilityPayment payment : payments) {
-            System.out.println("-" + payment.getDescription() + " - Amount: $" + payment.getAmount() + " - Date: " + payment.getDate());
-        }
-    }
-
-    public void viewDetail(int billId) {
-        // Display detailed information on individual utility transactions.
-
-        UtilityBill bill = getBillById(billId);
-
-        System.out.println("------------------------------------------");
-        System.out.println("Utility Bill Detail");
-        System.out.println("------------------------------------------");
-
-        System.out.println("Description: " + bill.getDescription());
-        System.out.println("Amount: $" + bill.getAmount());
-        System.out.println("Due Date: " + bill.getDueDate());
-
-        System.out.println("------------------------------------------");
-
-        System.out.println("Payments:");
-        for (UtilityPayment payment : payments) {
-            if (payment.getBillId() == billId) {
-                System.out.println("-" + payment.getDescription() + " - Amount: $" + payment.getAmount() + " - Date: " + payment.getDate());
+            List<Payment> utilityPayments = payments.getOrDefault(utilityName, Collections.emptyList());
+            for (Payment payment : utilityPayments) {
+                totalPaymentAmount += payment.getAmount();
             }
+
+            Summary utilitySummary = new Summary(totalBillAmount, totalPaymentAmount);
+            summary.put(utilityName, utilitySummary);
         }
+        return summary;
     }
 
-    private UtilityBill getBillById(int billId) {
-        // Helper method to get a bill by its ID.
-
-        for (UtilityBill bill : bills) {
-            if (bill.getId() == billId) {
-                return bill;
-            }
-        }
-
-        return null;
+    // Method to get detailed information on individual utility transactions
+    public List<Transaction> getTransactions(String utilityName) {
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.addAll(bills.getOrDefault(utilityName, Collections.emptyList()));
+        transactions.addAll(payments.getOrDefault(utilityName, Collections.emptyList()));
+        Collections.sort(transactions, Comparator.comparing(Transaction::getDate));
+        return transactions;
     }
+
 }
