@@ -1,0 +1,22 @@
+**Class: AccountManagementApplication**
+
+**Purpose:** Main application class for an account management system using Spring Boot.
+
+**Usage:** Typically serves as the entry point for the Spring Boot application, initializing and bootstrapping the application context.
+
+**Method:**
+
+- `public static void main(String[] args)`: The main method of the application.
+    - Initializes the Spring application context and bootstraps the application, using the arguments provided in the `args` array.
+
+**Example:**
+
+```java
+public class AccountManagementApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(AccountManagementApplication.class, args);
+    }
+}
+```
+
+In this example, the `AccountManagementApplication` class serves as the main application class for an account management system. When run, it initializes the Spring application context and bootstraps the application using the command-line arguments provided.
