@@ -1,20 +1,20 @@
-**Class:** `RealEstateManagementSystemApplication`
+**Class Name:** `RealEstateManagementSystemApplication`
 
-**Usage:** The `RealEstateManagementSystemApplication` class is the main Spring Boot application class for a real estate management system. It is annotated with `@SpringBootApplication`, which tells Spring to automatically configure the application and search for annotated components.
+**Description:**
+This is the main application class for the real estate management system. It is a Spring Boot application that serves as the entry point for the application.
 
-**Methods:**
+**Purpose:**
+This class is responsible for bootstrapping the Spring application and launching the real estate management system.
 
-* **main(String[] args)**: This is the main method of the application, where the Spring application starts. It takes an array of strings as an argument and passes it to the `SpringApplication.run()` method, which starts the Spring application.
+**Method:**
+
+1. The `main` method is the entry point of the application. It starts the Spring application using the `SpringApplication.run` method, passing the current application class (`RealEstateManagementSystemApplication.class`) as an argument along with any command-line arguments.
+
+**Usage:**
+To use this class, you can package it along with all the necessary code and dependencies into a JAR file. Then, you can run the JAR file using the `java -jar` command, and the Spring Boot application will start.
 
 **Example:**
-
-```java
-public class RealEstateManagementSystemApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(RealEstateManagementSystemApplication.class, args);
-    }
-}
 ```
-
-In this example, the `RealEstateManagementSystemApplication` class is the entry point to the application. When the application is started, the `main()` method is called, which in turn calls the `SpringApplication.run()` method to start the Spring application. Spring will then scan the classpath for annotated components and automatically configure the application.
+java -jar real-estate-management-system.jar
+```
+This will start the real estate management system application and make it accessible through its API endpoints.
