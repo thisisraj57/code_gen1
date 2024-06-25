@@ -1,0 +1,21 @@
+**Class: PropertyController**
+
+**Description:**
+The `PropertyController` class is a REST controller that handles HTTP requests related to property management in a real estate management system. It is annotated with `@RestController` to indicate that it is a controller for handling web requests and with `@RequestMapping("/properties")` to specify the path for the requests that this controller will handle.
+
+**Constructor:**
+
+- The constructor takes a `PropertyRepository` instance as a dependency and assigns it to the `propertyRepository` field. The `PropertyRepository` is an interface that provides methods for interacting with the `Property` entity in the database.
+
+**Methods:**
+
+- **getAllProperties**:
+   - This method handles GET requests to `/properties` and returns a list of all properties in the database. It uses the `findAll()` method of the `propertyRepository` to retrieve all properties.
+- **getPropertyById**:
+   - This method handles GET requests to `/properties/{id}` and returns the property with the specified `id`. It uses the `findById()` method of the `propertyRepository` to retrieve the property and throws a `ResourceNotFoundException` if no property is found with the given `id`.
+- **createProperty**:
+   - This method handles POST requests to `/properties` and creates a new property in the database. It uses the `save()` method of the `propertyRepository` to save the new property.
+- **updateProperty**:
+   - This method handles PUT requests to `/properties/{id}` and updates the property with the specified `id`. It first retrieves the property from the database using the `findById()` method of the `propertyRepository` and then updates its fields with the values from the request body. It then saves the updated property using the `save()` method of the `propertyRepository`.
+- **deleteProperty**:
+   - This method handles DELETE requests to `/properties/{id}` and deletes the property with the specified `id` from the database. It uses the `deleteById()` method of the `propertyRepository` to delete the property.
