@@ -1,0 +1,10 @@
+**Class: RealEstateManagementSystemApplication**
+
+**Description:**
+The `RealEstateManagementSystemApplication` class is the main application class for a Spring Boot-based real estate management system. It is responsible for bootstrapping the Spring application context and starting the application.
+
+**Method:**
+
+- **Main Method**:
+   - `public static void main(String[] args)`: This is the entry point of the application. It is a static method that starts the Spring application. It takes an array of arguments, typically command-line arguments, and passes them to the `SpringApplication.run()` method.
+   - `SpringApplication.run(RealEstateManagementSystemApplication.class, args)`: This method bootstraps the Spring application context and starts the application. It creates an instance of the `RealEstateManagementSystemApplication` class and registers it as the main application class in the Spring application context. The `args` parameter is passed to the application context as command-line arguments.
