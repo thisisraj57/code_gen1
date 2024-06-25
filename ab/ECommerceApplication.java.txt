@@ -1,0 +1,23 @@
+**Class:** `ECommerceApplication`
+
+**Description:**
+
+The `ECommerceApplication` class is the main entry point for the Spring Boot application. It initializes the Spring application context and starts the embedded web server.
+
+**Method:**
+
+- `main(String[] args)`: This is the main method of the application. It creates a `SpringApplication` instance and calls its `run` method to start the application.
+
+**Example Usage:**
+
+To run the application, you can execute the following command from the project's root directory:
+
+```
+mvn spring-boot:run
+```
+
+This will start the application on port 8080 by default. You can then access the application at `http://localhost:8080`.
+
+**Note:**
+
+For the application to work, you will need to have a MySQL database running and configured with the appropriate database credentials in `application.properties`.
