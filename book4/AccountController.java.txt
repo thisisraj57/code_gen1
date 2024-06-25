@@ -1,0 +1,35 @@
+**Class: AccountController**
+
+**Description:**
+The AccountController class is a RESTful controller that handles HTTP requests related to account management in the iPYMT system. It provides endpoints for creating, retrieving, updating, and deleting accounts.
+
+**Methods:**
+
+* **createAccount:**
+    * Accepts a JSON representation of an Account object in the HTTP request body.
+    * Parses the JSON and creates a new Account instance.
+    * Saves the new account to the database using the AccountRepository.
+    * Returns the created account as a JSON response.
+
+* **getAccount:**
+    * Accepts an account ID as a path variable in the HTTP request.
+    * Retrieves the account from the database using the AccountRepository.
+    * If the account is found, returns it as a JSON response.
+    * If the account is not found, throws a ResourceNotFoundException.
+
+* **updateAccount:**
+    * Accepts an account ID as a path variable and a JSON representation of updated account details in the HTTP request body.
+    * Retrieves the account from the database using the AccountRepository.
+    * If the account is found, updates its status based on the provided details.
+    * Saves the updated account to the database using the AccountRepository.
+    * Returns the updated account as a JSON response.
+    * If the account is not found, throws a ResourceNotFoundException.
+
+* **deleteAccount:**
+    * Accepts an account ID as a path variable in the HTTP request.
+    * Deletes the account from the database using the AccountRepository.
+    * Returns a 200 OK response if the deletion is successful.
+
+**Usage:**
+
+The AccountController is typically used in conjunction with a RESTful API framework, such as Spring MVC, to handle incoming HTTP requests and map them to the appropriate methods. It allows external systems and clients to interact with the iPYMT system and manage accounts through a standardized interface.
