@@ -1,0 +1,27 @@
+**Class:** RealEstateManagementApplication
+
+**Description:** This is the main application class for a Spring Boot application for a real estate management system. It uses Spring Boot's auto-configuration feature to automatically configure the application based on the presence of specific beans and JARs on the classpath.
+
+**Method:** main
+
+**Description:** This method is the entry point for the Spring Boot application. It is responsible for starting the application and initializing the Spring application context. The `SpringApplication.run()` method takes two arguments:
+
+* `RealEstateManagementApplication.class`: This is the main application class.
+* `args`: This is an array of command-line arguments passed to the application.
+
+**Example:**
+
+```java
+public class RealEstateManagementApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(RealEstateManagementApplication.class, args);
+	}
+}
+```
+
+To run this application, you can use the following command:
+
+```
+java -jar real-estate-management.jar
+```
