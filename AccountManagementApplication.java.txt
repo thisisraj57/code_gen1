@@ -1,0 +1,30 @@
+**Class:** AccountManagementApplication
+
+**Purpose:** The entry point of the Spring Boot application for Account Management in iPYMT.
+
+**Description:** This class serves as the main application class, bootstrapping the Spring application context and initializing the application. It uses the `SpringApplication.run()` method to launch the application, taking the current class (AccountManagementApplication) and command-line arguments (args) as parameters.
+
+**Method:**
+
+* **main:** The main method, which is the entry point of the Java application. It starts the Spring application by invoking the `SpringApplication.run()` method.
+
+**Example:**
+
+```java
+public class AccountManagementApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(AccountManagementApplication.class, args);
+    }
+}
+
+// Usage:
+public static void main(String[] args) {
+    AccountManagementApplication.main(args);
+}
+```
+
+**Notes:**
+
+* This class is typically annotated with `@SpringBootApplication`, which combines several annotations (e.g., `@Configuration`, `@EnableAutoConfiguration`, `@ComponentScan`) to configure the application.
+* The `SpringApplication.run()` method is responsible for creating the application context, loading application properties, initializing Spring beans, and starting the embedded web server (if applicable).
