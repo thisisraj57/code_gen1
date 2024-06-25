@@ -1,0 +1,30 @@
+**Class: AccountManagementApplication**
+
+**Purpose:**
+
+The main application class that serves as the entry point for the Spring Boot application.
+
+**Methods:**
+
+- **main(String[] args)**: The main method of the application. It is responsible for starting the Spring application context.
+
+**Usage:**
+
+To run the Spring Boot application, you can use the following command in your terminal:
+
+```
+java -jar account-management-application.jar
+```
+
+**Example:**
+
+```java
+public class AccountManagementApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(AccountManagementApplication.class, args);
+    }
+}
+```
+
+This code starts the Spring Boot application and loads the application context. The `@SpringBootApplication` annotation is used to indicate that this class is the main application class and to enable automatic configuration and component scanning.
