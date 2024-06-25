@@ -1,0 +1,26 @@
+**Class: RealEstateManagementApplication**
+
+The `RealEstateManagementApplication` class is the main application class for the real estate management system. It is annotated with the `@SpringBootApplication` annotation, which indicates that it is a Spring Boot application. The `main()` method is the entry point for the application. It uses the `SpringApplication.run()` method to launch the application.
+
+**Method: main(String[] args)**
+
+The `main()` method is the entry point for the application. It takes an array of strings as input, which are the command-line arguments passed to the application. The method uses the `SpringApplication.run()` method to launch the application. The `SpringApplication.run()` method takes two arguments:
+
+* The class that is annotated with the `@SpringBootApplication` annotation.
+* The command-line arguments that were passed to the application.
+
+The `SpringApplication.run()` method will create a Spring application context and start the application.
+
+**Example**
+
+The following code shows an example of how to use the `RealEstateManagementApplication` class:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        SpringApplication.run(RealEstateManagementApplication.class, args);
+    }
+}
+```
+
+This code will launch the real estate management system application.
