@@ -1,9 +1,12 @@
 public class Main {
-    public static void main(String[] args) {
-        Computer computer = new Computer("Dell XPS", "Dell", 1000);
-        computer.printDetails();
 
-        Laptop laptop = new Laptop("MacBook Air", "Apple", 1200, 10);
-        laptop.printDetails();
+    public static void main(String[] args) {
+        Person person1 = new Person();
+
+        person1.setName("John Doe");
+        person1.setCity("Los Angeles");
+
+        System.out.println("Person Name: " + person1.getName());
+        System.out.println("Person City: " + person1.getCity());
     }
 }
