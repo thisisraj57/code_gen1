@@ -1,64 +1,106 @@
-class UtilityBillManagement {
+public class UtilityBillManagement {
 
-    // Data structures to store utility bills and payments
-    private Map<String, List<Bill>> bills;
-    private Map<String, List<Payment>> payments;
+    private List<UtilityBill> bills;
+    private List<UtilityPayment> payments;
 
-    // Constructor to initialize the system
-    public UtilityBillManagement() {
-        this.bills = new HashMap<>();
-        this.payments = new HashMap<>();
+    public UtilityBillManagement(List<UtilityBill> bills, List<UtilityPayment> payments) {
+        this.bills = bills;
+        this.payments = payments;
     }
 
-    // Method to add a new bill
-    public void addBill(String utilityName, Bill bill) {
-        if (bills.containsKey(utilityName)) {
-            bills.get(utilityName).add(bill);
-        } else {
-            bills.put(utilityName, List.of(bill));
+    public UtilityBillSummary getSummary() {
+        double totalBillAmount = 0;
+        double totalPaymentAmount = 0;
+
+        for (UtilityBill bill : bills) {
+            totalBillAmount += bill.getAmount();
+        }
+
+        for (UtilityPayment payment : payments) {
+            totalPaymentAmount += payment.getAmount();
+        }
+
+        return new UtilityBillSummary(totalBillAmount, totalPaymentAmount);
+    }
+
+    public class UtilityBillSummary {
+
+        private double totalBillAmount;
+        private double totalPaymentAmount;
+
+        public UtilityBillSummary(double totalBillAmount, double totalPaymentAmount) {
+            this.totalBillAmount = totalBillAmount;
+            this.totalPaymentAmount = totalPaymentAmount;
+        }
+
+        public double getTotalBillAmount() {
+            return totalBillAmount;
+        }
+
+        public double getTotalPaymentAmount() {
+            return totalPaymentAmount;
         }
     }
 
-    // Method to add a new payment
-    public void addPayment(String utilityName, Payment payment) {
-        if (payments.containsKey(utilityName)) {
-            payments.get(utilityName).add(payment);
-        } else {
-            payments.put(utilityName, List.of(payment));
+    public class UtilityBill {
+
+        private String billId;
+        private String utilityType;
+        private String billingPeriod;
+        private double amount;
+
+        public UtilityBill(String billId, String utilityType, String billingPeriod, double amount) {
+            this.billId = billId;
+            this.utilityType = utilityType;
+            this.billingPeriod = billingPeriod;
+            this.amount = amount;
+        }
+
+        public String getBillId() {
+            return billId;
+        }
+
+        public String getUtilityType() {
+            return utilityType;
+        }
+
+        public String getBillingPeriod() {
+            return billingPeriod;
+        }
+
+        public double getAmount() {
+            return amount;
         }
     }
 
-    // Method to get a summary of all bills and payments
-    public Map<String, Summary> getSummary() {
-        Map<String, Summary> summary = new HashMap<>();
-        for (Map.Entry<String, List<Bill>> entry : bills.entrySet()) {
-            String utilityName = entry.getKey();
-            List<Bill> utilityBills = entry.getValue();
+    public class UtilityPayment {
 
-            double totalBillAmount = 0;
-            double totalPaymentAmount = 0;
-            for (Bill bill : utilityBills) {
-                totalBillAmount += bill.getAmount();
-            }
+        private String paymentId;
+        private String billId;
+        private String paymentDate;
+        private double amount;
 
-            List<Payment> utilityPayments = payments.getOrDefault(utilityName, Collections.emptyList());
-            for (Payment payment : utilityPayments) {
-                totalPaymentAmount += payment.getAmount();
-            }
-
-            Summary utilitySummary = new Summary(totalBillAmount, totalPaymentAmount);
-            summary.put(utilityName, utilitySummary);
+        public UtilityPayment(String paymentId, String billId, String paymentDate, double amount) {
+            this.paymentId = paymentId;
+            this.billId = billId;
+            this.paymentDate = paymentDate;
+            this.amount = amount;
         }
-        return summary;
-    }
 
-    // Method to get detailed information on individual utility transactions
-    public List<Transaction> getTransactions(String utilityName) {
-        List<Transaction> transactions = new ArrayList<>();
-        transactions.addAll(bills.getOrDefault(utilityName, Collections.emptyList()));
-        transactions.addAll(payments.getOrDefault(utilityName, Collections.emptyList()));
-        Collections.sort(transactions, Comparator.comparing(Transaction::getDate));
-        return transactions;
-    }
+        public String getPaymentId() {
+            return paymentId;
+        }
 
+        public String getBillId() {
+            return billId;
+        }
+
+        public String getPaymentDate() {
+            return paymentDate;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+    }
 }
