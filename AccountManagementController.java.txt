@@ -1,0 +1,39 @@
+**Java Spring Boot Controller: Account Management**
+
+**Class:** `AccountManagementController`
+
+**Purpose:** This controller provides a REST API for managing accounts in an iPYMT system. It handles account opening, approval, and rejection requests.
+
+**Methods:**
+
+**1. openAccount()**
+   - HTTP Method: POST
+   - Path: `/open-account`
+   - Request Body: `AccountRequest` DTO representing the account opening request.
+   - Response: `ResponseEntity<Account>` with the created `Account` entity and a 201 Created status code.
+
+**2. approveAccount()**
+   - HTTP Method: GET
+   - Path: `/approve-account/{accountId}`
+   - Path Variable: `accountId` representing the ID of the account to be approved.
+   - Authentication: Bank representative authentication (implementation not shown in the provided code).
+   - Response: `ResponseEntity<Account>` with the approved `Account` entity and a 200 OK status code.
+
+**3. rejectAccount()**
+   - HTTP Method: GET
+   - Path: `/reject-account/{accountId}`
+   - Path Variable: `accountId` representing the ID of the account to be rejected.
+   - Authentication: Bank representative authentication (implementation not shown in the provided code).
+   - Response: `ResponseEntity<Account>` with the rejected `Account` entity and a 200 OK status code.
+
+**Dependencies:**
+
+- `AccountService` bean for handling the business logic of account management.
+- `Account` entity representing the account data.
+- `AccountRequest` DTO for capturing the account opening request payload.
+- Custom exceptions or Spring's `ResponseEntity` for handling errors gracefully.
+
+**Assumptions:**
+- The `Account` entity has properties like `id`, `name`, `email`, and `status` (e.g., pending, approved, rejected).
+- Bank representative authentication is handled separately and is not shown in the provided code.
+- Notification to the customer is sent after account approval or rejection (implementation not shown in the provided code).
