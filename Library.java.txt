@@ -1,0 +1,42 @@
+**Class: Library**
+
+**Package:** com.example.library
+
+**Purpose:** This class represents a library in the system.
+
+**Properties:**
+
+* **id:** (Long) The unique identifier of the library.
+* **name:** (String) The name of the library.
+* **location:** (String) The location of the library.
+
+**Methods:**
+
+* **Getters and Setters:** The class provides getters and setters for all of its properties.
+
+**Example Usage:**
+
+```java
+// Create a new Library object
+Library library = new Library();
+
+// Set the library's name and location
+library.setName("Central Library");
+library.setLocation("100 Main Street");
+
+// Save the library to the database
+libraryRepository.save(library);
+
+// Retrieve the library from the database by ID
+Library retrievedLibrary = libraryRepository.findById(library.getId()).orElseThrow(() -> new ResourceNotFoundException("Library not found with id: " + library.getId()));
+
+// Update the library's name and location
+retrievedLibrary.setName("New Central Library");
+retrievedLibrary.setLocation("200 Main Street");
+
+// Save the updated library to the database
+libraryRepository.save(retrievedLibrary);
+
+// Delete the library from the database
+libraryRepository.deleteById(library.getId());
+```
