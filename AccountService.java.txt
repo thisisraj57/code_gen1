@@ -1,0 +1,34 @@
+**Class Name:** AccountService
+
+**Purpose:** Provides business logic operations for managing accounts in iPYMT. It interacts with the `AccountRepository` to perform CRUD operations and additional business-specific logic.
+
+**Methods:**
+
+**createAccount(Account account)**:
+  - Creates a new account by delegating the operation to the `AccountRepository`.
+  - Saves the provided `Account` object to the database.
+  - Returns the saved account.
+
+**getAccount(Long id)**:
+  - Retrieves an account by its unique identifier (id).
+  - Calls the `findById()` method of the `AccountRepository` to fetch the account.
+  - Returns the account if found, or `null` otherwise.
+
+**getAllAccounts()**:
+  - Fetches all accounts stored in the database.
+  - Calls the `findAll()` method of the `AccountRepository` to retrieve all accounts.
+  - Returns a list of all accounts.
+
+**updateAccount(Long id, Account account)**:
+  - Updates an existing account with new information.
+  - Fetches the account with the specified id using the `findById()` method.
+  - If the account is found, it updates the account's status.
+  - Saves the updated account to the database.
+  - Returns the updated account if successful, or `null` if the account was not found.
+
+**deleteAccount(Long id)**:
+  - Deletes an account from the database by its unique identifier.
+  - Calls the `deleteById()` method of the `AccountRepository` to remove the account.
+
+**Usage:**
+This service class is typically used by controllers or other components in the application to perform CRUD operations and business-specific logic related to account management. It acts as a central point for managing account-related data and operations.
