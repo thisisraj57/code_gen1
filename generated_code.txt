@@ -1,0 +1,40 @@
+### Function Documentation
+
+**Function Name:** `is_prime`
+
+**Description:**
+
+Checks if a given number is prime.
+
+**Parameters:**
+
+* `number`: The number to check.
+
+**Return Value:**
+
+Returns True if the number is prime, False otherwise.
+
+**Example Usage:**
+
+```python
+# Check if the number 17 is prime
+is_prime(17)  # Output: True
+
+# Check if the number 100 is prime
+is_prime(100)  # Output: False
+```
+
+**Detailed Explanation:**
+
+The `is_prime` function takes a single parameter, `number`, and checks if it is a prime number. A prime number is a natural number greater than 1 that is not a product of two smaller natural numbers.
+
+The function first checks if the input number is equal to 1. If it is, the function returns `False` because 1 is not a prime number.
+
+If the input number is not 1, the function iterates through all the numbers from 2 to the square root of the input number (inclusive). For each number `i` in this range, the function checks if the input number is divisible by `i` without any remainder. If it is, the function returns `False` because the input number is not prime.
+
+If the function completes the loop without finding any divisors for the input number, it means the input number is prime, and the function returns `True`.
+
+**Complexity Analysis:**
+
+* Time complexity: O(sqrt(n)), where n is the input number.
+* Space complexity: O(1).
