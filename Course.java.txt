@@ -1,0 +1,42 @@
+**Class: Course**
+
+**Package:** com.example.course
+
+**Purpose:** This class represents a course in the system.
+
+**Properties:**
+
+* **id:** (Long) The unique identifier of the course.
+* **name:** (String) The name of the course.
+* **description:** (String) The description of the course.
+
+**Methods:**
+
+* **Getters and Setters:** The class provides getters and setters for all of its properties.
+
+**Example Usage:**
+
+```java
+// Create a new Course object
+Course course = new Course();
+
+// Set the course's name and description
+course.setName("Introduction to Computer Science");
+course.setDescription("This course provides an overview of the fundamental concepts of computer science, including programming, data structures, and algorithms.");
+
+// Save the course to the database
+courseRepository.save(course);
+
+// Retrieve the course from the database by ID
+Course retrievedCourse = courseRepository.findById(course.getId()).orElseThrow(() -> new ResourceNotFoundException("Course not found with id: " + course.getId()));
+
+// Update the course's name and description
+retrievedCourse.setName("Advanced Computer Science");
+retrievedCourse.setDescription("This course covers advanced topics in computer science, including operating systems, networking, and artificial intelligence.");
+
+// Save the updated course to the database
+courseRepository.save(retrievedCourse);
+
+// Delete the course from the database
+courseRepository.deleteById(course.getId());
+```
