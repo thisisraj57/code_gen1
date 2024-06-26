@@ -1,0 +1,37 @@
+**Class Name:** AccountController
+
+**Purpose:** A RESTful controller class responsible for handling HTTP requests and responses related to account management in iPYMT. It delegates business logic operations to the `AccountService` class.
+
+**Methods:**
+
+**createAccount(@RequestBody Account account)**:
+  - HTTP POST method for creating a new account.
+  - Receives a JSON representation of an `Account` object in the request body.
+  - Delegates the account creation to the `AccountService` by calling `createAccount()`.
+  - Returns a response with the created account in JSON format.
+
+**getAccount(@PathVariable Long id)**:
+  - HTTP GET method for retrieving an account by its unique identifier (id).
+  - Reads the `id` from the path variable in the request URL.
+  - Delegates the account retrieval to the `AccountService` by calling `getAccount()`.
+  - Returns a response with the found account in JSON format.
+
+**getAllAccounts()**:
+  - HTTP GET method for fetching all accounts stored in the database.
+  - Delegates the operation to the `AccountService` by calling `getAllAccounts()`.
+  - Returns a response with a list of all accounts in JSON format.
+
+**updateAccount(@PathVariable Long id, @RequestBody Account account)**:
+  - HTTP PUT method for updating an existing account with new information.
+  - Reads the `id` from the path variable and the updated account data from the request body.
+  - Delegates the account update to the `AccountService` by calling `updateAccount()`.
+  - Returns a response with the updated account in JSON format.
+
+**deleteAccount(@PathVariable Long id)**:
+  - HTTP DELETE method for deleting an account from the database.
+  - Reads the `id` from the path variable in the request URL.
+  - Delegates the account deletion to the `AccountService` by calling `deleteAccount()`.
+  - Returns an empty response (no content) upon successful deletion.
+
+**Usage:**
+This controller class is typically used in conjunction with a RESTful API framework (such as Spring MVC) to handle incoming HTTP requests and produce JSON responses for account-related operations. It provides a convenient way to interact with the application's account management features from external clients or frontend applications.
