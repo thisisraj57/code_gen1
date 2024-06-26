@@ -1,0 +1,65 @@
+**Class: StudentController**
+
+**Package:** com.example.student
+
+**Purpose:** This class is a REST controller for handling HTTP requests related to students. It is annotated with `@RestController`, which means that it will handle HTTP requests and return responses in JSON format.
+
+**Constructor:**
+
+* The constructor takes a `StudentRepository` instance as a parameter and assigns it to the `studentRepository` field.
+
+**Methods:**
+
+* **getAllStudents:** This method handles GET requests to `/api/students` and returns a list of all students in the database.
+* **createStudent:** This method handles POST requests to `/api/students` and creates a new student in the database. The new student is created using the data in the HTTP request body.
+* **getStudentById:** This method handles GET requests to `/api/students/{id}` and returns the student with the specified ID.
+* **updateStudent:** This method handles PUT requests to `/api/students/{id}` and updates the student with the specified ID. The updated student data is taken from the HTTP request body.
+* **deleteStudent:** This method handles DELETE requests to `/api/students/{id}` and deletes the student with the specified ID.
+
+**Example Usage:**
+
+```java
+@RestController
+@RequestMapping("/api/students")
+public class StudentController {
+
+    private final StudentRepository studentRepository;
+
+    public StudentController(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
+    // GET /api/students
+    @GetMapping
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
+    }
+
+    // POST /api/students
+    @PostMapping
+    public Student createStudent(@RequestBody Student student) {
+        return studentRepository.save(student);
+    }
+
+    // GET /api/students/{id}
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Student not found with id: " + id));
+    }
+
+    // PUT /api/students/{id}
+    @PutMapping("/{id}")
+    public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
+        Student existingStudent = studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Student not found with id: " + id));
+        existingStudent.setName(student.getName());
+        existingStudent.setEmail(student.getEmail());
+        return studentRepository.save(existingStudent);
+    }
+
+    // DELETE /api/students/{id}
+    @DeleteMapping("/{id}")
+    public void deleteStudent(@PathVariable Long id) {
+        studentRepository.deleteById(id);
+    }
+}
+```
