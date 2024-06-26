@@ -1,0 +1,42 @@
+**Class: Student**
+
+**Package:** com.example.student
+
+**Purpose:** This class represents a student in the system.
+
+**Properties:**
+
+* **id:** (Long) The unique identifier of the student.
+* **name:** (String) The name of the student.
+* **email:** (String) The email address of the student.
+
+**Methods:**
+
+* **Getters and Setters:** The class provides getters and setters for all of its properties.
+
+**Example Usage:**
+
+```java
+// Create a new Student object
+Student student = new Student();
+
+// Set the student's name and email
+student.setName("John Doe");
+student.setEmail("john.doe@email.com");
+
+// Save the student to the database
+studentRepository.save(student);
+
+// Retrieve the student from the database by ID
+Student retrievedStudent = studentRepository.findById(student.getId()).orElseThrow(() -> new ResourceNotFoundException("Student not found with id: " + student.getId()));
+
+// Update the student's name and email
+retrievedStudent.setName("Jane Doe");
+retrievedStudent.setEmail("jane.doe@email.com");
+
+// Save the updated student to the database
+studentRepository.save(retrievedStudent);
+
+// Delete the student from the database
+studentRepository.deleteById(student.getId());
+```
