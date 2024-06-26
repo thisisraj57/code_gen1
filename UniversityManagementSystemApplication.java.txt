@@ -1,0 +1,19 @@
+**Class: UniversityManagementSystemApplication**
+
+**Package:** com.example.university
+
+**Purpose:** This class is the main application class for the University Management System. It is annotated with `@SpringBootApplication`, which makes it the entry point for the Spring Boot application.
+
+**Method:**
+
+* **main:** The `main` method is the entry point for the Java application. It starts the Spring Boot application by calling `SpringApplication.run`.
+
+**Example Usage:**
+
+```java
+public static void main(String[] args) {
+    SpringApplication.run(UniversityManagementSystemApplication.class, args);
+}
+```
+
+This will start the Spring Boot application and make it listen for HTTP requests on port 8080 by default.
