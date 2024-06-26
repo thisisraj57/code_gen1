@@ -1,0 +1,42 @@
+**Class: Professor**
+
+**Package:** com.example.professor
+
+**Purpose:** This class represents a professor in the system.
+
+**Properties:**
+
+* **id:** (Long) The unique identifier of the professor.
+* **name:** (String) The name of the professor.
+* **department:** (String) The department of the professor.
+
+**Methods:**
+
+* **Getters and Setters:** The class provides getters and setters for all of its properties.
+
+**Example Usage:**
+
+```java
+// Create a new Professor object
+Professor professor = new Professor();
+
+// Set the professor's name and department
+professor.setName("Dr. Jane Doe");
+professor.setDepartment("Computer Science");
+
+// Save the professor to the database
+professorRepository.save(professor);
+
+// Retrieve the professor from the database by ID
+Professor retrievedProfessor = professorRepository.findById(professor.getId()).orElseThrow(() -> new ResourceNotFoundException("Professor not found with id: " + professor.getId()));
+
+// Update the professor's name and department
+retrievedProfessor.setName("Dr. John Doe");
+retrievedProfessor.setDepartment("Electrical Engineering");
+
+// Save the updated professor to the database
+professorRepository.save(retrievedProfessor);
+
+// Delete the professor from the database
+professorRepository.deleteById(professor.getId());
+```
