@@ -1,0 +1,65 @@
+**Class: CourseController**
+
+**Package:** com.example.course
+
+**Purpose:** This class is a REST controller for handling HTTP requests related to courses. It is annotated with `@RestController`, which means that it will handle HTTP requests and return responses in JSON format.
+
+**Constructor:**
+
+* The constructor takes a `CourseRepository` instance as a parameter and assigns it to the `courseRepository` field.
+
+**Methods:**
+
+* **getAllCourses:** This method handles GET requests to `/api/courses` and returns a list of all courses in the database.
+* **createCourse:** This method handles POST requests to `/api/courses` and creates a new course in the database. The new course is created using the data in the HTTP request body.
+* **getCourseById:** This method handles GET requests to `/api/courses/{id}` and returns the course with the specified ID.
+* **updateCourse:** This method handles PUT requests to `/api/courses/{id}` and updates the course with the specified ID. The updated course data is taken from the HTTP request body.
+* **deleteCourse:** This method handles DELETE requests to `/api/courses/{id}` and deletes the course with the specified ID.
+
+**Example Usage:**
+
+```java
+@RestController
+@RequestMapping("/api/courses")
+public class CourseController {
+
+    private final CourseRepository courseRepository;
+
+    public CourseController(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
+
+    // GET /api/courses
+    @GetMapping
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
+    }
+
+    // POST /api/courses
+    @PostMapping
+    public Course createCourse(@RequestBody Course course) {
+        return courseRepository.save(course);
+    }
+
+    // GET /api/courses/{id}
+    @GetMapping("/{id}")
+    public Course getCourseById(@PathVariable Long id) {
+        return courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Course not found with id: " + id));
+    }
+
+    // PUT /api/courses/{id}
+    @PutMapping("/{id}")
+    public Course updateCourse(@PathVariable Long id, @RequestBody Course course) {
+        Course existingCourse = courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Course not found with id: " + id));
+        existingCourse.setName(course.getName());
+        existingCourse.setDescription(course.getDescription());
+        return courseRepository.save(existingCourse);
+    }
+
+    // DELETE /api/courses/{id}
+    @DeleteMapping("/{id}")
+    public void deleteCourse(@PathVariable Long id) {
+        courseRepository.deleteById(id);
+    }
+}
+```
