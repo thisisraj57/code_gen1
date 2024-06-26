@@ -1,0 +1,43 @@
+**Class: Enrollment**
+
+**Package:** com.example.enrollment
+
+**Purpose:** This class represents an enrollment in the system.
+
+**Properties:**
+
+* **id:** (Long) The unique identifier of the enrollment.
+* **student:** (Student) The student who is enrolled in the course.
+* **course:** (Course) The course in which the student is enrolled.
+* **grade:** (String) The grade that the student received in the course.
+
+**Methods:**
+
+* **Getters and Setters:** The class provides getters and setters for all of its properties.
+
+**Example Usage:**
+
+```java
+// Create a new Enrollment object
+Enrollment enrollment = new Enrollment();
+
+// Set the enrollment's student, course, and grade
+enrollment.setStudent(student);
+enrollment.setCourse(course);
+enrollment.setGrade("A");
+
+// Save the enrollment to the database
+enrollmentRepository.save(enrollment);
+
+// Retrieve the enrollment from the database by ID
+Enrollment retrievedEnrollment = enrollmentRepository.findById(enrollment.getId()).orElseThrow(() -> new ResourceNotFoundException("Enrollment not found with id: " + enrollment.getId()));
+
+// Update the enrollment's grade
+retrievedEnrollment.setGrade("B");
+
+// Save the updated enrollment to the database
+enrollmentRepository.save(retrievedEnrollment);
+
+// Delete the enrollment from the database
+enrollmentRepository.deleteById(enrollment.getId());
+```
